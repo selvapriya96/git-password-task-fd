@@ -1,36 +1,32 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const location = useLocation();
-
-  const navItems = [
-    { path: "/register", label: "Register" },
-    { path: "/login", label: "Login" },
-    { path: "/forgot-password", label: "Forgot Password" },
-  ];
-
+export default function Navbar() {
   return (
-    <nav className="bg-blue-600 text-white p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-lg font-bold">🔐 Password Reset App</h1>
-        <div className="flex gap-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`px-3 py-1 rounded-md transition ${
-                location.pathname === item.path
-                  ? "bg-white text-blue-600 font-semibold"
-                  : "hover:bg-blue-500"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+    <nav className="bg-gray-800 text-white p-4">
+      <div className="max-w-5xl mx-auto flex justify-between items-center">
+        
+        <h1 className="text-lg font-bold">Password Task</h1>
+
+        <div className="space-x-6">
+
+          <Link to="/" className="hover:underline">
+            Register
+          </Link>
+
+          <Link to="/login" className="hover:underline">
+            Login
+          </Link>
+
+          <Link to="/forgot-password" className="hover:underline">
+            Forgot Password
+          </Link>
+
+          <Link to="/reset-password/123" className="hover:underline">
+            Reset Password 
+          </Link>
+
         </div>
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}
