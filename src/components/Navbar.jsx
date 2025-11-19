@@ -13,17 +13,7 @@ export default function Navbar() {
             Register
           </Link>
 
-          <Link to="/login" className="hover:underline">
-            Login
-          </Link>
-
-          <Link to="/forgot-password" className="hover:underline">
-            Forgot Password
-          </Link>
-
-          <Link to="/reset-password/123" className="hover:underline">
-            Reset Password 
-          </Link>
+        
 
         </div>
       </div>
