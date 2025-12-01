@@ -1,10 +1,11 @@
-import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api"; 
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate(); 
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,8 +13,12 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/login", formData);
+      const res = await api.post("/auth/login", formData); 
       toast.success("Login successful!");
+
+      localStorage.setItem("token", res.data.token);
+
+      navigate("/dashboard"); 
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
     }
@@ -24,11 +29,23 @@ export default function Login() {
       <h2 className="text-xl font-semibold mb-4">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-3">
 
-        <input name="email" type="email" placeholder="Email"
-          className="border p-2 w-full" onChange={handleChange} required />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          className="border p-2 w-full"
+          onChange={handleChange}
+          required
+        />
 
-        <input name="password" type="password" placeholder="Password"
-          className="border p-2 w-full" onChange={handleChange} required />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          className="border p-2 w-full"
+          onChange={handleChange}
+          required
+        />
 
         <button className="bg-blue-600 text-white px-4 py-2 rounded w-full">
           Login
@@ -47,8 +64,7 @@ export default function Login() {
         </Link>
       </div>
 
-
-       <div className="mt-2 text-center">
+      <div className="mt-2 text-center">
         <Link to="/reset-password/123" className="text-green-600 underline">
           Test Reset Page
         </Link>
