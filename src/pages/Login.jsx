@@ -4,16 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api"; 
 
 export default function Login() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email: "", password: "" });
   const navigate = useNavigate(); 
 
   const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    setData({ ...data, [e.target.name]: e.target.value }); 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/login", formData); 
+      const res = await api.post("/login", data); 
       toast.success("Login successful!");
 
       localStorage.setItem("token", res.data.token);
@@ -34,6 +33,7 @@ export default function Login() {
           type="email"
           placeholder="Email"
           className="border p-2 w-full"
+          value={data.email}   
           onChange={handleChange}
           required
         />
@@ -43,6 +43,7 @@ export default function Login() {
           type="password"
           placeholder="Password"
           className="border p-2 w-full"
+          value={data.password}
           onChange={handleChange}
           required
         />
