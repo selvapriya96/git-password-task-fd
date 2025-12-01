@@ -1,6 +1,6 @@
 import { useState } from "react";
-import api from "../api";
 import { toast } from "react-toastify";
+import api from "../api";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -8,8 +8,9 @@ export default function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/forgot-password", { email }); 
-      toast.success(res.data.message || "Reset link sent to your email");
+      const res = await api.post("/forgot-password", { email });
+      toast.success(res.data.message || "Reset link sent");
+      setEmail("");
     } catch (err) {
       toast.error(err.response?.data?.message || "Error sending reset link");
     }
@@ -24,14 +25,10 @@ export default function ForgotPassword() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your registered email"
-            type="email"
             className="w-full p-2 border rounded"
             required
           />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded"
-          >
+          <button className="w-full bg-blue-600 text-white py-2 rounded">
             Send Reset Link
           </button>
         </form>

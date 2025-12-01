@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import api from "../api";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 export default function Register() {
   const [data, setData] = useState({ name: "", email: "", password: "" });

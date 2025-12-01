@@ -8,7 +8,8 @@ export default function Login() {
   const navigate = useNavigate(); 
 
   const handleChange = (e) =>
-    setData({ ...data, [e.target.name]: e.target.value }); 
+    setData({ ...data, [e.target.name]: e.target.value });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -16,8 +17,7 @@ export default function Login() {
       toast.success("Login successful!");
 
       localStorage.setItem("token", res.data.token);
-
-      navigate("/dashboard"); 
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
     }
@@ -27,27 +27,24 @@ export default function Login() {
     <div className="max-w-md mx-auto bg-white p-6 rounded shadow">
       <h2 className="text-xl font-semibold mb-4">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-3">
-
         <input
           name="email"
           type="email"
+          value={data.email}
           placeholder="Email"
           className="border p-2 w-full"
-          value={data.email}   
           onChange={handleChange}
           required
         />
-
         <input
           name="password"
           type="password"
+          value={data.password}
           placeholder="Password"
           className="border p-2 w-full"
-          value={data.password}
           onChange={handleChange}
           required
         />
-
         <button className="bg-blue-600 text-white px-4 py-2 rounded w-full">
           Login
         </button>
@@ -58,16 +55,9 @@ export default function Login() {
           Forgot Password?
         </Link>
       </div>
-
       <div className="text-center mt-2">
-        <Link to="/" className="text-gray-600">
+        <Link to="/register" className="text-gray-600">
           Create an Account
-        </Link>
-      </div>
-
-      <div className="mt-2 text-center">
-        <Link to="/reset-password/123" className="text-green-600 underline">
-          Test Reset Page
         </Link>
       </div>
     </div>
